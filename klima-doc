@@ -1,0 +1,16 @@
+Klíma berendezés hűtési teljesítményét kiszámító OOP szoftver modul fejlesztése
+
+Inputok: helyiség térfogata, ökölszámok
+ 
+Szükséges hűtési teljesítmény(ökölszámok):
+1-es kategória: szigetelt: 25W/légköbméter
+2-es kategória: közepesen szigetelt: 30W/légköbméter
+3-as szigeteletlen: 40W/légköbméter
+
+Cooler osztály létrehozása
+
+Kimenet:
+Adja vissza:
+kiszámolt hűtési teljesítmény megejelenítése
+megadott szigetelési kategória szöveges kiírása
+kiszámolt helység térfogat kiírása
