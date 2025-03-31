@@ -6,8 +6,6 @@ const app = express();
 const port = 3000;
 const klima = require('./klima');
 
-
-
 app.use(express.json());
 app.use(cors());
 
@@ -21,7 +19,7 @@ const db = new sqlite3.Database("klima.db", (err) => {
 });
 
 db.run(`CREATE TABLE IF NOT EXISTS klima (
-    Id INTEGER PRIMARY AUTOINCREMENT,
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
     RWidth INTEGER NOT NULL,
     RLength INTEGER NOT NULL,
     RHeight INTEGER NOT NULL,
@@ -33,7 +31,7 @@ db.run(`CREATE TABLE IF NOT EXISTS klima (
 
     )`);
 
-    app.post('api/klima',(req, res) => {
+    app.post('/api/klima',(req, res) => {
         const { Rwidth, Rlength, RHeight, ICode } = req.body;
 
         const myKlima = new klima.getDevice(RHeight, Rwidth, Rlength, ICode);
@@ -44,16 +42,27 @@ db.run(`CREATE TABLE IF NOT EXISTS klima (
         const gHeatingP = myKlima.getHeatingPower();
         const gConditioner = myKlima.getConditioner();
 
-        db.run(`INSERT INTO klima (Rwidth, RELength, RHeight, RVolume, RInsulation, CPower, HPower, SPower) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, 
+        db.run(`INSERT INTO klima (Rwidth, RLength, RHeight, RVolume, RInsulation, CPower, HPower, SPower) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, 
             [Rwidth, Rlength, RHeight, gVolume, gCategory, gCoolingP, gHeatingP, gConditioner],
             function(err) {
                 if (err) return res.status(500).send(err.message);
-                res.status(200).send({ message: 'Sikeres adatrögzítés.', id: this.lastID, })
+                res.status(200).send({ message: 'Sikeres adatrögzítés.',
+                    id: this.lastID,Rwidth,Rlength,RHeight,gVolume,gCategory,gCoolingP,gHeatingP,gConditioner
+                })
                 
             }
          )
 
     }) 
+    app.get('/api/klima', (req, res) => {
+        db.all(`SELECT * FROM klima`),[],(err,data) => {
+            if(err) {
+                return res.status(500).send({message: 'Hiba történt az adatok lekérdezése során.'})
+            }
+            res.status(200).json(data);
+        }
+
+    })
 
 
 
