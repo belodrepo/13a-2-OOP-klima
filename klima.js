@@ -33,7 +33,7 @@ class Cooler {
                 cpow = vol * this.category[2].power;
                 break;
         }
-        return cpow;
+        return Math.round(cpow);
 
     }
 
@@ -56,7 +56,7 @@ class Cooler {
                 hpow = vol * this.category[2].power;
                 break;
         }
-        return hpow;
+        return Math.round(hpow);
     }
 
 getCategory = () => {

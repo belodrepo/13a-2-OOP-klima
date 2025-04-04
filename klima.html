@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap4/css/bootstrap.min.css">
+    <title>Klíma teljesítmény kalkulátor Kliens</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 text-center bg-info text-white p-1">
+                <img src="images/white-snow.png" alt="klima-logo" height="110">
+        
+            </div>
+            <div class="col-md-10 bg-info text-white p-1">
+                <h2 class="mt-5">Klíma-teljesítmény számítás REST Kliens</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h3 class="text-center my-3">Kalkulációs adatok megadása</h3>
+                <form action="">
+                    <div class="form-group my-4">
+                        <label for="" class="form-label">Helység magassága (m):</label>
+                        <input type="number" class="form-control border border-dark" name="height"
+                            placeholder="Adja meg ahelyiség magasságát...">
+                    </div>
+                    <div class="form-group my-4">
+                        <label for="" class="form-label">Helység szélessége (m):</label>
+                        <input type="number" class="form-control border border-dark" name="width"
+                            placeholder="Adja meg ahelyiség szélességét...">
+                    </div>
+                    <div class="form-group my-4">
+                        <label for="" class="form-label">Helység hosszúság (m):</label>
+                        <input type="number" class="form-control border border-dark" name="length"
+                            placeholder="Adja meg ahelyiség hosszúságát...">
+                    </div>
+                    <div class="form-group my-4">
+                        <label for="" class="form-label">Szigetelési kategória:</label>
+                        <select name="insulation" id="" class="form-control">
+                            <option value="0">Válasszon szigetelési kategóriát!</option>
+                            <option value="1">Szigetelt</option>
+                            <option value="2">Részben szigetelt</option>
+                            <option value="3">Szigeteletlen</option>
+                        </select>
+                        <button class="btn btn-info my-4">Számítás</button>
+                </form>
+            </div>
+            <div class="col-md-3"></div>
+
+        </div>
+        <div class="row">
+            <div class="col-12 mb-5">
+                <h3 class="text-center my-2">Számítási adatok összesítése</h3>
+                <table class="table table-bordered table-striped table-hover">
+                    <thead class="bg-dark text-white text-center">
+                        <tr>
+                            <th>Szélesség</th>
+                            <th>Hosszúság</th>
+                            <th>Magasság</th>
+                            <th>Térfogat</th>
+                            <th>Szigetelés</th>
+                            <th>Hűtési teljesítmény</th>
+                            <th>Fűtési teljesítmény</th>
+                            <th>Javasolt teljesítmény</th>
+                        </tr>
+                    </thead>
+                    <tbody id="klimaData"><!--Ide jönnek az adatok!--></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

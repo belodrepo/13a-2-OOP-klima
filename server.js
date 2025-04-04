@@ -36,7 +36,7 @@ db.run(`CREATE TABLE IF NOT EXISTS klima (
 
         const myKlima = new klima.getDevice(RHeight, RWidth, RLength, ICode);
 
-        const gVolume = myKlima.getVolume();
+        const gVolume = myKlima.getVolume().toFixed(2);
         const gCategory = myKlima.getCategory();
         const gCoolingP = myKlima.getCoolingPower();
         const gHeatingP = myKlima.getHeatingPower();
