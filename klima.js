@@ -104,7 +104,7 @@ class getDevice extends Cooler{
         return accepted;
     }  
 }
-/*const MyDevice = new getDevice(2.8, 3, 4, 3);
+/*const MyDevice = new getDevice(2.8, 3, 4, 1);
 console.log("Helység térfogata: " + MyDevice.getVolume().toFixed(2));
 console.log("Hűtési teljesítmény: " + MyDevice.getCoolingPower().toFixed(2));
 console.log("Fűtési teljesítmény: " + MyDevice.getHeatingPower().toFixed(2));
