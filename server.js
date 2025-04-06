@@ -32,19 +32,19 @@ db.run(`CREATE TABLE IF NOT EXISTS klima (
     )`);
 
     app.post('/api/klima',(req, res) => {
-        const { RWidth, RLength, RHeight, ICode } = req.body;
+        const { width, length, height, insulation } = req.body;
 
-        const myKlima = new klima.getDevice(RHeight, RWidth, RLength, ICode);
+        const myKlima = new klima.getDevice(height, width, length, insulation);
 
         const gVolume = myKlima.getVolume().toFixed(2);
         const gCategory = myKlima.getCategory();
         const gCoolingP = myKlima.getCoolingPower();
         const gHeatingP = myKlima.getHeatingPower();
         const gConditioner = myKlima.getConditioner();
-        /*console.log(RWidth);
-        console.log(RHeight);
-        console.log(RLength);
-        console.log(ICode);
+        /*console.log(width);
+        console.log(height);
+        console.log(length);
+        console.log(insulation);
         console.log(gVolume);
         console.log(gCategory);
         console.log(gCoolingP);
@@ -52,11 +52,11 @@ db.run(`CREATE TABLE IF NOT EXISTS klima (
         console.log(gConditioner);*/
 
         db.run(`INSERT INTO klima (RWidth, RLength, RHeight, RVolume, RInsulation, CPower, HPower, SPower) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, 
-            [RWidth, RLength, RHeight, gVolume, gCategory, gCoolingP, gHeatingP, gConditioner],
+            [width, length, height, gVolume, gCategory, gCoolingP, gHeatingP, gConditioner],
             function(err) {
-                if (err) return res.status(500).send(err.message);
-                res.status(200).send({ message: 'Sikeres adatrögzítés.',
-                    id: this.lastID,RWidth,RLength,RHeight,gVolume,gCategory,gCoolingP,gHeatingP,gConditioner
+                if (err) return res.status(500).json({message: err.message});
+                res.status(200).json({ message: 'Sikeres adatrögzítés.',
+                    id: this.lastID,width,length,height,gVolume,gCategory,gCoolingP,gHeatingP,gConditioner
                 })
                 
             }
@@ -74,6 +74,16 @@ app.get('/api/klima', (req, res) => {
 
 });
 
+app.get('/api/klima/last', (req, res) => {
+    db.all(`SELECT * FROM klima ORDER BY rowid DESC LIMIT 1`, [], (err, lastrow) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ message: 'Hiba történt az utolsó rekord kiolvasása során' });
+        } 
+        res.status(200).json(lastrow);
+    });
+
+});
 
 
 
